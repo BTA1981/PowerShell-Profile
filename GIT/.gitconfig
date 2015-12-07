@@ -10,5 +10,7 @@
 	user = BTA1981
 [push]
 	default = simple
+[url "https://github.com/"]
+  	insteadOf = gh://
 [alias]
 	lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
