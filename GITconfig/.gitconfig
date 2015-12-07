@@ -1,7 +1,0 @@
-[user]
-	name = BTA1981
-	email = bart_tacken@hotmail.com
-	mail	required = true
-[alias]
-	lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
- core.autocrlf false
