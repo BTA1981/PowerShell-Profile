@@ -1,0 +1,14 @@
+[user]
+	name = Bart
+	email = bart_tacken@hotmail.com
+	mail = bart_tacken@hotmail.com
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[github]
+	user = BTA1981
+[push]
+	default = simple
+[alias]
+	lol = log --graph --decorate --pretty=oneline --all --abbrev-commit
