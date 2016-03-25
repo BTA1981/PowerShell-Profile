@@ -111,6 +111,97 @@ Function Start-SSHagent {
 }
 
 
+
+<#
+.SYNOPSIS
+  Custom function for use in PS profile. 
+    Get-MyCredential
+    Usage:
+    
+
+    If a credential is stored in $CredPath, it will be used.
+    If no credential is found, Export-Credential will start and offer to
+    Store a credential at the location specified.
+.PARAMETER $CredPath 
+ Path and file name of file that containts encrypted credentials.
+.OUTPUTS
+  PScredential object with encrypted credentials
+.NOTES
+  Version:        1.0
+  Author:         Bart Tacken
+  Creation Date:  14-03-2016
+  Purpose/Change: Initial script development
+  Source: http://social.technet.microsoft.com/wiki/contents/articles/4546.working-with-passwords-secure-strings-and-credentials-in-windows-powershell.aspx
+.EXAMPLE
+  Get-MyCredential -CredPath C:\temp\credentials.xml
+#>
+function Get-MyCredential {
+    param(
+        [string]$CredPath,
+        [switch]$Help
+    )
+        # Check if the path is valid and points to a file. If not, 
+        if (!(Test-Path -Path $CredPath -PathType Leaf)) {
+            Write-Host "Path and/or file [$CredPath] does not exist!"
+            $User = Read-Host "Please enter a username if you like to create one.." 
+            Export-Credential -User $User -Path $CredPath
+        }
+        # Import credentials from XML
+        $credXML = Import-Clixml $CredPath
+    
+        # Create PScredential Object
+        $Credential = New-Object System.Management.Automation.PsCredential($credXML.UserName, $credXML.Password)
+        
+        #Exit scope but returns variable
+        Return $Credential
+}
+
+<#
+.SYNOPSIS
+  Custom function for use in PS profile. 
+  Exports Credentials to an XML file for unattended use.
+  These credentials can only be used by the same account and on the same machine from where these where created.
+
+  XML file can be used to provide credentials for services like Azure or O365:
+  $o365cred = Get-MyCredential -CredPath "C:\temp\cred4.xml"
+  Connect-MsOlService -Credential o365
+
+.PARAMETER $User
+  Full username (service account)
+.PARAMETER $Path 
+ Output path with file names attribute if required
+.OUTPUTS
+  XML file with encrypted password credentials
+.NOTES
+  Version:        1.0
+  Author:         Bart Tacken
+  Creation Date:  14-03-2016
+  Purpose/Change: Initial script development
+  Source: http://social.technet.microsoft.com/wiki/contents/articles/4546.working-with-passwords-secure-strings-and-credentials-in-windows-powershell.aspx
+.EXAMPLE
+  Export-Credential -user "test.account@demo.nl" -path c:\temp\Credentials.xml
+#>
+Function Export-Credential(
+    [string]$user,
+    [string] $path) {
+
+    #Ask for Password interactively and store in memory using encryption (only reversible by account that created encrypted string)
+    $PassWord = Read-Host "Please enter password" -AsSecureString
+    
+    # Uncomment following for encryping a plaintext variable: 
+    # $PassWord = "P@ssword"
+    # $PassWord = $PassWord | ConvertTo-SecureString -AsPlainText -Force
+    
+    # Create PScredential Object for CMDlets that require "-Credential" parameter
+    $Credential = New-Object System.Management.Automation.PsCredential($user, $Password)
+    
+    # Export encrypted contents into XML file for later use 
+    $Credential | Export-Clixml $path
+}
+
+Write-Host 'Use CONNECT-EXONLINE and DISCONNECT-EXONLINE for managing your O365 sessions' -ForegroundColor Cyan
+Write-Host 'Use Get-MyCredential and Export-Credential for managing your PS credentials' -ForegroundColor Cyan
+
 #----------------------------------------------------------[User Interface Config]--------------------------------------------------
 $Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'Black')
 $Host.UI.RawUI.ForegroundColor = 'Green'
