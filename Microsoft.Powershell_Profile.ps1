@@ -199,6 +199,20 @@ Function Export-Credential(
     $Credential | Export-Clixml $path
 }
 
+Function Connect-EXOnline {
+    $URL = "https://ps.outlook.com/powershell"  
+    $Credentials = Get-Credential -Message "Enter your Office 365 admin credentials"
+    $EXOSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri $URL -Credential $Credentials -Authentication Basic -AllowRedirection -Name "Exchange Online"
+        Import-PSSession $EXOSession
+}
+
+Function Disconnect-EXOnline {
+    
+    Remove-PSSession -Name "Exchange Online"
+
+}
+
+
 Write-Host 'Use CONNECT-EXONLINE and DISCONNECT-EXONLINE for managing your O365 sessions' -ForegroundColor Cyan
 Write-Host 'Use Get-MyCredential and Export-Credential for managing your PS credentials' -ForegroundColor Cyan
 
