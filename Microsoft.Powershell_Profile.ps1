@@ -91,6 +91,14 @@ Function Install-PoSHGit {
     }
 }
 
+Function Install-PsReadLine { # Install PsReadLine with PSget if not available
+    If (!(Get-Module PsReadLine)) {
+        Write-Output "Downloading and installing PSGet module installer.."
+       New-Object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | Invoke-Expression
+       Install-Module PSreadline
+    }
+}
+
 
 # Copy GIT config to default GIT config folder (%USERPROFILE/$HOME)
 Function Get-GITconfig {
@@ -240,7 +248,7 @@ Install-Choco
 choco config set allowglobalconfirmation disabled | Out-Null
 Prompt
 Install-PSGet
-
+Install-PSreadline
 
 #----------------------------------------------------------[GIT Config]----------------------------------------------------------
 
