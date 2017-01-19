@@ -141,7 +141,7 @@ Migrate.DiskOpsMaxRetries      20
 Misc.DebugBuddyEnable          0                                               
 Mem.SampleActivePctMin         0                                               
 Power.CStateMaxLatency         500                                             
-Vpx.Vpxa.config.vpxa.hostKey   52808a06-e3f1-d6d4-5b80-f8964425c909            
+Vpx.Vpxa.config.vpxa.hostKey   52a09a71-75bb-1d1d-223d-debb590c9d74            
 BufferCache.HardMaxDirty       95                                              
 Misc.SerialBaudRate            115200                                          
 Config.Defaults.security.ho... True                                            
@@ -409,7 +409,7 @@ VMkernel.Boot.preventFreePa... False
 Net.TcpipRxDispatchQueues      1                                               
 Config.Defaults.cpuidMask.m... disable                                         
 Config.Defaults.cpuidMask.m... disable                                         
-ScratchConfig.ConfiguredScr... /vmfs/volumes/5594f0d6-0c7940fe-0429-002590e2...
+ScratchConfig.ConfiguredScr... /vmfs/volumes/5593abf9-3bb41127-605d-002590e3...
 Cpu.CreditAgePeriod            3000                                            
 VMkernel.Boot.timerForceTSC    False                                           
 Numa.PageMigRateMax            16000                                           
@@ -449,7 +449,7 @@ Disk.SchedQuantum              8
 Syslog.loggers.Xorg.rotate     8                                               
 Disk.SchedulerWithReservation  1                                               
 VMkernel.Boot.storageMaxVMs... 32                                              
-ScratchConfig.CurrentScratc... /vmfs/volumes/5594f0d6-0c7940fe-0429-002590e2...
+ScratchConfig.CurrentScratc... /vmfs/volumes/5593abf9-3bb41127-605d-002590e3...
 FT.FTCptThreadPolicy           65536                                           
 Net.UseHwIPv6Csum              1                                               
 FT.AckIntervalMax              1000000                                         
@@ -916,7 +916,7 @@ Mem.LLSwapDefragFree           12800
 Mem.UseLowMemFirst             0                                               
 Numa.SwapLocalityEnable        1                                               
 Power.UseCStates               1                                               
-Vpx.Vpxa.config.vpxa.hostIp    172.16.2.203                                    
+Vpx.Vpxa.config.vpxa.hostIp    172.16.2.201                                    
 DataMover.HardwareAccelerat... 1                                               
 Misc.WorldletRemoteActivate... 0                                               
 Syslog.loggers.vobd.size       1024                                            
@@ -1067,5 +1067,5 @@ FT.XmitSyncQueueLen            64
 NFS.ReceiveBufferSize          256                                             
 HBR.DemandlogTransferMaxIo     4                                               
 COW.COWMaxHeapSizeMB           192                                             
-1
+
 
