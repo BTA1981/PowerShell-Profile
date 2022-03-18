@@ -1,3 +1,5 @@
+# Source
+# https://4sysops.com/archives/getting-started-with-the-psreadline-module-for-powershell/
 
 Import-Module PSReadLine
 
